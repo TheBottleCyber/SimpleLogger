@@ -1,4 +1,4 @@
-¯\_(ツ)_/¯
+¯\\_(ツ)_/¯
 
 # What is it?
 Simple library for logging your messages/exceptions
@@ -13,4 +13,4 @@ logger.WriteConsole("Work!");
 ```
 
 # Settings
-Parameters can be configured in the settings initialization method
+Parameters can be configured in the settings initialization method, you can view it in LoggerSettings.cs
