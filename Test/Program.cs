@@ -13,11 +13,6 @@ namespace Test
             {
                 return $"{message}";
             }
-
-            public string FormatMessage(Exception ex)
-            {
-                return ex.ToString();
-            }
         }
 
         static async Task Main(string[] args)
@@ -25,7 +20,7 @@ namespace Test
             // ¯\_(ツ)_/¯
 
             var logger = new Logger(new LoggerSettings(new DefaultFormatter()));
-            logger.Write(WriteType.Console,"Work!");
+            logger.Write(WriteType.Console, "Work!");
             await logger.WriteAsync(WriteType.Console, "Async work!");
 
             logger.Write(WriteType.File, "File writing work!", "log");

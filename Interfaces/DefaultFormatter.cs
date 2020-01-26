@@ -10,10 +10,5 @@ namespace SimpleLogger.Interfaces
         {
             return $"[{DateTime.Now}]: {message}\r\n";
         }
-
-        public string FormatMessage(Exception exception)
-        {
-            return exception.ToString();
-        }
     }
 }

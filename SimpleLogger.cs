@@ -25,6 +25,8 @@ namespace SimpleLogger
         /// <param name="filePath">This field is only needed for WriteType.File, specifying file</param>
         public void Write(WriteType type, string message, string filePath = "")
         {
+            if (_loggerSettings.EmptyNullException && string.IsNullOrEmpty(message)) throw new ArgumentException("Message cannot be empty", nameof(message));
+
             switch (type)
             {
                 case WriteType.Console:
@@ -55,6 +57,8 @@ namespace SimpleLogger
         /// <param name="filePath">This field is only needed for WriteType.File, specifying file</param>
         public async Task WriteAsync(WriteType type, string message, string filePath = "")
         {
+            if (_loggerSettings.EmptyNullException && string.IsNullOrEmpty(message)) throw new ArgumentException("Message cannot be empty", nameof(message));
+
             switch (type)
             {
                 case WriteType.Console:
