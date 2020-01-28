@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SimpleLogger
 {
-    public enum WriteType
+    public enum LoggerOutputType
     {
         Console,
         File,
@@ -20,30 +20,28 @@ namespace SimpleLogger
         /// <summary>
         /// Logger Write
         /// </summary>
-        /// <param name="type">Specifying where to write the message</param>
+        /// <param name="loggerOutputType">Specifying where to write the message</param>
         /// <param name="message">The message you want to write</param>
-        /// <param name="filePath">This field is only needed for WriteType.File, specifying file</param>
-        public void Write<T>(WriteType type, T message, string filePath = "")
+        /// <param name="filePath">This field is only needed for LoggerOutputType.File, specifying file</param>
+        public void Write<T>(LoggerOutputType loggerOutputType, T message, string filePath = "")
         {
-            if (_loggerSettings.EmptyNullException && message == null) throw new ArgumentException("Message cannot be null", nameof(message));
-
-            switch (type)
+            switch (loggerOutputType)
             {
-                case WriteType.Console:
+                case LoggerOutputType.Console:
                 {
-                    Console.Write(_loggerSettings.Formatter.FormatMessage(message));
+                    Console.Write(FormatMessage(message));
                     break;
                 }
 
-                case WriteType.File:
+                case LoggerOutputType.File:
                 {
-                    File.WriteAllText(filePath, _loggerSettings.Formatter.FormatMessage(message));
+                    File.WriteAllText(filePath, FormatMessage(message));
                     break;
                 }
 
-                case WriteType.DebugOutput:
+                case LoggerOutputType.DebugOutput:
                 {
-                    Debug.WriteLine(_loggerSettings.Formatter.FormatMessage(message));
+                    Debug.WriteLine(FormatMessage(message));
                     break;
                 }
             }
@@ -52,33 +50,41 @@ namespace SimpleLogger
         /// <summary>
         /// Logger Write Async
         /// </summary>
-        /// <param name="type">Specifying where to write the message</param>
+        /// <param name="loggerOutputType">Specifying where to write the message</param>
         /// <param name="message">The message you want to write</param>
-        /// <param name="filePath">This field is only needed for WriteType.File, specifying file</param>
-        public async Task WriteAsync<T>(WriteType type, T message, string filePath = "")
+        /// <param name="filePath">This field is only needed for LoggerOutputType.File, specifying file</param>
+        public async Task WriteAsync<T>(LoggerOutputType loggerOutputType, T message, string filePath = "")
         {
-            if (_loggerSettings.EmptyNullException && message == null) throw new ArgumentException("Message cannot be null", nameof(message));
-
-            switch (type)
+            switch (loggerOutputType)
             {
-                case WriteType.Console:
+                case LoggerOutputType.Console:
                 {
-                    await Console.Out.WriteAsync(_loggerSettings.Formatter.FormatMessage(message));
+                    await Console.Out.WriteAsync(FormatMessage(message));
                     break;
                 }
 
-                case WriteType.File:
+                case LoggerOutputType.File:
                 {
-                    await File.WriteAllTextAsync(filePath, _loggerSettings.Formatter.FormatMessage(message));
+                    await File.WriteAllTextAsync(filePath, FormatMessage(message));
                     break;
                 }
 
-                case WriteType.DebugOutput:
+                case LoggerOutputType.DebugOutput:
                 {
-                    Debug.WriteLine(_loggerSettings.Formatter.FormatMessage(message));
+                    Debug.WriteLine(FormatMessage(message));
                     break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Logger Message Formatter
+        /// </summary>
+        /// <param name="message">The message you want to format</param>
+        public string FormatMessage<T>(T message)
+        {
+            if (_loggerSettings.EmptyNullException && message == null) throw new ArgumentException("Message cannot be null", nameof(message));
+            return _loggerSettings.Formatter.FormatMessage(message);
         }
     }
 }

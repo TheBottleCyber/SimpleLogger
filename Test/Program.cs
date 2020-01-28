@@ -11,10 +11,10 @@ namespace Test
         {
             public string FormatMessage<T>(T message)
             {
-                if(message is string) return $"{message}";
+                if(message is string) return $"~{message}~";
                 // ...
 
-                return "not string";
+                return "not string\r\n";
             }
         }
 
@@ -23,15 +23,18 @@ namespace Test
             // ¯\_(ツ)_/¯
 
             var logger = new Logger(new LoggerSettings(new DefaultFormatter()));
-            logger.Write(WriteType.Console, "Work!");
-            await logger.WriteAsync(WriteType.Console, "Async work!");
+            logger.Write(LoggerOutputType.Console, "Work!");
+            await logger.WriteAsync(LoggerOutputType.Console, "Async work!");
 
-            logger.Write(WriteType.File, "File writing work!", "log");
-            await logger.WriteAsync(WriteType.File, "File writing work!", "log");
+            logger.Write(LoggerOutputType.File, "File writing work!", "log");
+            await logger.WriteAsync(LoggerOutputType.File, "File writing work!", "log");
 
             var loggerOwnImplementation = new Logger(new LoggerSettings(new OwnImplementation()));
-            loggerOwnImplementation.Write(WriteType.Console, "Own implementation Work!");
-            loggerOwnImplementation.Write(WriteType.Console, 1); // Writes no string
+            loggerOwnImplementation.Write(LoggerOutputType.Console, "Own implementation Work!");
+            loggerOwnImplementation.Write(LoggerOutputType.Console, 1); // Writes no string
+
+            var formatted = loggerOwnImplementation.FormatMessage("Formating via own implementation work!");
+            Console.WriteLine(formatted);
         }
     }
 }
