@@ -9,7 +9,7 @@ Simple library for logging your messages/exceptions/etc with support for your fo
 # Quick start
 ```c#
 var logger = new Logger(new LoggerSettings(new DefaultFormatter()));
-logger.Write(WriteType.Console, "Work!");
+logger.Write(LoggerOutputType.Console, "Work!");
 ```
 
 # Format Message using Library
