@@ -9,9 +9,12 @@ namespace Test
     {
         class OwnImplementation : IFormatter
         {
-            public string FormatMessage(string message)
+            public string FormatMessage<T>(T message)
             {
-                return $"{message}";
+                if(message is string) return $"{message}";
+                // ...
+
+                return "not string";
             }
         }
 
@@ -28,6 +31,7 @@ namespace Test
 
             var loggerOwnImplementation = new Logger(new LoggerSettings(new OwnImplementation()));
             loggerOwnImplementation.Write(WriteType.Console, "Own implementation Work!");
+            loggerOwnImplementation.Write(WriteType.Console, 1); // Writes no string
         }
     }
 }

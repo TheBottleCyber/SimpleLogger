@@ -6,7 +6,7 @@ namespace SimpleLogger.Interfaces
 {
     public class DefaultFormatter : IFormatter
     {
-        public string FormatMessage(string message)
+        public string FormatMessage<T>(T message)
         {
             return $"[{DateTime.Now}]: {message}\r\n";
         }
