@@ -15,6 +15,7 @@ namespace SimpleLogger.Formatters
         public string FormatMessage<T>(T message)
         {
             var serializationMessage = new SerializationMessage<T>(message);
+            // I added a comma to make it convenient to look through https://jsonformatter.org/json-parser
             return $"{JsonConvert.SerializeObject(serializationMessage, _jsonSettings)},";
         }
     }
