@@ -21,7 +21,7 @@ namespace Example
         static async Task Main(string[] args)
         {
             // ¯\_(ツ)_/¯
-            var logger = new Logger(new LoggerSettings(new DefaultFormatter()));
+            var logger = new Logger();
             logger.Write(LoggerOutputType.Console, "Work!");
             logger.Write(LoggerOutputType.Console, GetTestException());
             await logger.WriteAsync(LoggerOutputType.Console, "Async work!");

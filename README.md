@@ -10,7 +10,7 @@ You can compile it as .NET Framework but more async methods not implemented in f
 
 # Quick start
 ```c#
-var logger = new Logger(new LoggerSettings(new DefaultFormatter()));
+var logger = new Logger();
 logger.Write(LoggerOutputType.Console, "Work!");
 ```
 

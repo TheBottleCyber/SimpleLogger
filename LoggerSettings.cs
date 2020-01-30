@@ -1,4 +1,6 @@
-﻿namespace SimpleLogger
+﻿using SimpleLogger.Formatters;
+
+namespace SimpleLogger
 {
     public class LoggerSettings
     {
@@ -10,9 +12,9 @@
         /// </summary>
         /// <param name="formatter">Formatter interface, default implements DefaultFormatter</param>
         /// <param name="emptyNullException">Throw Exception if message null</param>
-        public LoggerSettings(IFormatter formatter, bool emptyNullException = false)
+        public LoggerSettings(IFormatter formatter = null, bool emptyNullException = false)
         {
-            Formatter = formatter;
+            Formatter = formatter ?? new DefaultFormatter();
             EmptyNullException = emptyNullException;
         }
     }

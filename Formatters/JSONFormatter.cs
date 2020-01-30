@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SimpleLogger.Formatters
 {
     public class JSONFormatter : IFormatter
     {
-        private JsonSerializerSettings _jsonSettings = new JsonSerializerSettings();
-        public JSONFormatter(JsonSerializerSettings jsonSettings = null) => _jsonSettings = jsonSettings;
+        private JsonSerializerSettings _jsonSettings { get; }
+        public JSONFormatter(JsonSerializerSettings jsonSettings = null) => _jsonSettings = jsonSettings ?? new JsonSerializerSettings();
 
         public string FormatMessage<T>(T message)
         {

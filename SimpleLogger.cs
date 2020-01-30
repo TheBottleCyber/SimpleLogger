@@ -15,7 +15,7 @@ namespace SimpleLogger
     public class Logger
     {
         private LoggerSettings _loggerSettings { get; }
-        public Logger(LoggerSettings loggerSettings) => _loggerSettings = loggerSettings;
+        public Logger(LoggerSettings loggerSettings = null) => _loggerSettings = loggerSettings ?? new LoggerSettings();
 
         /// <summary>
         /// Logger Write
